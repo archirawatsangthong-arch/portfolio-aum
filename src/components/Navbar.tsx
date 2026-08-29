@@ -13,7 +13,6 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true);
 
-    // เช็กธีมที่เคยบันทึกไว้
     const savedTheme = localStorage.getItem("portfolio-theme");
     if (savedTheme === "light") {
       setIsDark(false);
@@ -23,7 +22,6 @@ export default function Navbar() {
       document.documentElement.classList.remove("light");
     }
 
-    // ฟังก์ชันอัปเดตเวลา Real-time
     const updateTime = () => {
       const now = new Date();
       setTime(
@@ -39,7 +37,6 @@ export default function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
-  // ฟังก์ชันสลับโหมด พร้อมสลับ Class ให้ทั้งเว็บ
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.add("light");
@@ -52,11 +49,22 @@ export default function Navbar() {
     }
   };
 
+  // ฟังก์ชันเลื่อนหน้าจอไปยัง Section ปลายทาง
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const yOffset = -80; // เว้นระยะห่างด้านบนไม่ให้บาร์บังหัวข้อ
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", targetId: "about" },
+    { name: "Projects", targetId: "projects" },
+    { name: "Skills", targetId: "skills" },
+    { name: "Contact", targetId: "contact" },
   ];
 
   if (!mounted) return null;
@@ -73,16 +81,16 @@ export default function Navbar() {
             : "bg-white/95 border-slate-300/80 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
         }`}
       >
-        {/* จุดสถานะ Pulse */}
         <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
 
-        {/* แถบเมนูคลิกเลื่อนหน้าจอ */}
+        {/* ปุ่มหมวดหมู่ */}
         <div className="flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
-              href={link.href}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              href={`#${link.targetId}`}
+              onClick={(e) => handleScrollTo(e, link.targetId)}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 isDark
                   ? "text-slate-200 hover:text-cyan-300 hover:bg-white/10"
                   : "text-slate-800 hover:text-cyan-600 hover:bg-slate-100"
@@ -93,21 +101,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* เส้นแบ่งคั่น */}
-        <span
-          className={`h-4 w-px ${isDark ? "bg-white/15" : "bg-slate-300"}`}
-        />
+        <span className={`h-4 w-px ${isDark ? "bg-white/15" : "bg-slate-300"}`} />
 
-        {/* นาฬิกา Real-time HUD */}
+        {/* HUD นาฬิกา */}
         <div className="flex items-center gap-1.5 font-mono">
-          <Clock
-            className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`}
-          />
-          <span
-            className={`text-xs sm:text-sm font-bold tracking-wider ${
-              isDark ? "text-white" : "text-slate-900"
-            }`}
-          >
+          <Clock className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`} />
+          <span className={`text-xs sm:text-sm font-bold tracking-wider ${isDark ? "text-white" : "text-slate-900"}`}>
             {time || "00:00:00"}
           </span>
           <span
@@ -121,7 +120,7 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* ปุ่มสลับโหมดกลางวัน/กลางคืน */}
+        {/* ปุ่มสลับโหมด */}
         <button
           type="button"
           onClick={toggleTheme}

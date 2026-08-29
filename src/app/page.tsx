@@ -14,16 +14,28 @@ export default function Home() {
       <CinematicIntro />
 
       <main id="main" className="relative z-10">
-        <Hero />
+        <section id="about">
+          <Hero />
+        </section>
+
         <div className="flex w-full flex-col gap-32 px-6 py-28 sm:px-12 lg:px-20">
-          <Projects />
+          <section id="projects">
+            <Projects />
+          </section>
+
           <Mindset />
-          <Skills />
+
+          <section id="skills">
+            <Skills />
+          </section>
+
           <DIIStatement />
         </div>
       </main>
 
-      <Footer />
+      <section id="contact">
+        <Footer />
+      </section>
     </div>
   );
 }
