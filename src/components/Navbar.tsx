@@ -13,7 +13,7 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true);
 
-    // ตรวจสอบค่าธีมเดิมจาก localStorage หรือค่าเริ่มต้น
+    // เช็กธีมที่เคยบันทึกไว้
     const savedTheme = localStorage.getItem("portfolio-theme");
     if (savedTheme === "light") {
       setIsDark(false);
@@ -23,7 +23,7 @@ export default function Navbar() {
       document.documentElement.classList.remove("light");
     }
 
-    // ฟังก์ชันเดินเวลา Real-time
+    // ฟังก์ชันอัปเดตเวลา Real-time
     const updateTime = () => {
       const now = new Date();
       setTime(
@@ -39,7 +39,7 @@ export default function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
-  // ฟังก์ชันสลับธีม สว่าง / มืด
+  // ฟังก์ชันสลับโหมด พร้อมสลับ Class ให้ทั้งเว็บ
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.add("light");
@@ -62,29 +62,29 @@ export default function Navbar() {
   if (!mounted) return null;
 
   return (
-    <header className="fixed top-4 sm:top-6 right-4 sm:right-8 z-[9999] pointer-events-none isolate">
+    <header className="fixed top-4 sm:top-6 right-4 sm:right-8 z-[9999] pointer-events-none">
       <motion.nav
-        initial={{ y: -20, opacity: 0, scale: 0.95 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className={`pointer-events-auto flex items-center gap-2 sm:gap-3.5 p-1.5 px-3 sm:px-4 rounded-full backdrop-blur-xl border transition-all duration-300 ${
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className={`pointer-events-auto flex items-center gap-2 sm:gap-3 p-1.5 px-3.5 sm:px-4 rounded-2xl backdrop-blur-2xl border transition-all duration-300 shadow-2xl ${
           isDark
-            ? "bg-[#050914]/95 border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.8)] text-white"
-            : "bg-white/95 border-slate-300 shadow-[0_15px_35px_rgba(0,0,0,0.12)] text-slate-900"
+            ? "bg-[#030712]/90 border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+            : "bg-white/95 border-slate-300/80 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
         }`}
       >
-        {/* จุดสถานะสีฟ้า */}
-        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.8)] ml-1" />
+        {/* จุดสถานะ Pulse */}
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
 
-        {/* แถบเมนูคลิกเลื่อนหน้าจอ (ตัวหนังสือหนา ชัดเจน) */}
+        {/* แถบเมนูคลิกเลื่อนหน้าจอ */}
         <div className="flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className={`px-3 py-1.5 rounded-full font-mono text-xs sm:text-sm font-bold transition-all duration-200 ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all duration-200 ${
                 isDark
-                  ? "text-slate-100 hover:text-cyan-300 hover:bg-white/10"
+                  ? "text-slate-200 hover:text-cyan-300 hover:bg-white/10"
                   : "text-slate-800 hover:text-cyan-600 hover:bg-slate-100"
               }`}
             >
@@ -93,12 +93,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* เส้นคั่น */}
+        {/* เส้นแบ่งคั่น */}
         <span
-          className={`h-4 w-px ${isDark ? "bg-white/20" : "bg-slate-300"}`}
+          className={`h-4 w-px ${isDark ? "bg-white/15" : "bg-slate-300"}`}
         />
 
-        {/* นาฬิกา Real-time */}
+        {/* นาฬิกา Real-time HUD */}
         <div className="flex items-center gap-1.5 font-mono">
           <Clock
             className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-600"}`}
@@ -111,31 +111,31 @@ export default function Navbar() {
             {time || "00:00:00"}
           </span>
           <span
-            className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
+            className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
               isDark
-                ? "bg-cyan-500/20 text-cyan-300"
-                : "bg-cyan-100 text-cyan-700 font-extrabold"
+                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                : "bg-cyan-100 text-cyan-800 border border-cyan-200"
             }`}
           >
             TH
           </span>
         </div>
 
-        {/* ปุ่มสลับโหมด Light / Dark */}
+        {/* ปุ่มสลับโหมดกลางวัน/กลางคืน */}
         <button
           type="button"
           onClick={toggleTheme}
           aria-label="Toggle theme"
-          className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200 active:scale-90 ${
+          className={`flex items-center justify-center w-8 h-8 rounded-xl border transition-all duration-200 active:scale-90 ${
             isDark
-              ? "bg-white/10 border-white/15 text-amber-400 hover:bg-amber-400/20"
-              : "bg-slate-100 border-slate-300 text-cyan-600 hover:bg-cyan-50"
+              ? "bg-white/5 border-white/10 text-amber-400 hover:bg-amber-400/20 hover:border-amber-400/40"
+              : "bg-slate-100 border-slate-300 text-amber-600 hover:bg-amber-50 hover:border-amber-300"
           }`}
         >
           {isDark ? (
             <Moon size={15} className="fill-amber-400 text-amber-400" />
           ) : (
-            <Sun size={16} className="text-amber-500 font-bold" />
+            <Sun size={16} className="text-amber-600 font-bold" />
           )}
         </button>
       </motion.nav>
