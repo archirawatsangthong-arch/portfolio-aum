@@ -3,21 +3,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Terminal } from "lucide-react";
+import { Sparkles, Terminal, MapPin } from "lucide-react";
 import HeroScene from "./HeroScene";
-import Hero3DCore from "./Hero3DCore";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-24 px-6 sm:px-12 lg:px-20 bg-[#030712]">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-6 sm:px-12 lg:px-20 bg-[#030712]">
       
-      {/* 1. ฉากหลัง 3D Scene (อนุภาคและโครงข่ายมิติ) */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-45">
+      {/* 1. ฉากหลัง 3D โครงข่ายอนุภาคมิติลึก */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-40">
         <HeroScene reduceMotion={false} />
       </div>
 
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.08] blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.07] blur-[160px] pointer-events-none rounded-full" />
       <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-blue-600/[0.06] blur-[150px] pointer-events-none rounded-full" />
 
       {/* ป้ายมุมซ้ายบน */}
@@ -26,7 +25,7 @@ export default function Hero() {
         <span>PORTFOLIO // 2026</span>
       </div>
 
-      <div className="relative z-10 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center pt-6">
+      <div className="relative z-10 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center pt-8">
         
         {/* ฝั่งซ้าย: ข้อมูลแนะนำตัว */}
         <motion.div
@@ -65,38 +64,48 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* ฝั่งขวา: การ์ดแสดงแอนิเมชัน 3D Avatar / Character */}
+        {/* ฝั่งขวา: กรอบรูปภาพโปรไฟล์ Cyber-Tech Card เดี่ยวๆ */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="lg:col-span-5 flex items-center justify-center relative w-full"
         >
-          <div className="relative w-full max-w-[400px] group">
+          <div className="relative w-full max-w-[360px] group">
             
-            {/* Ambient Shadow Glow ด้านหลังการ์ด */}
+            {/* Ambient Shadow Glow */}
             <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-tr from-cyan-500/30 via-blue-500/20 to-transparent blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* กรอบ Cyber-Tech Card */}
-            <div className="relative rounded-[28px] overflow-hidden border border-cyan-500/30 bg-slate-950/70 backdrop-blur-2xl shadow-2xl p-3">
+            {/* กรอบรูปภาพหลัก */}
+            <div className="relative rounded-[28px] overflow-hidden border border-cyan-500/30 bg-slate-950/80 backdrop-blur-2xl shadow-2xl p-3">
               
-              {/* HUD Badge บนการ์ด */}
-              <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-3 py-1 rounded-xl bg-black/70 backdrop-blur-md border border-cyan-500/30 font-mono text-[11px] text-cyan-300 shadow-lg">
+              {/* HUD Badge บนภาพ */}
+              <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-3 py-1 rounded-xl bg-black/75 backdrop-blur-md border border-cyan-500/30 font-mono text-[11px] text-cyan-300 shadow-lg">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>3D // INTERACTIVE</span>
+                <span>DEV // IDENTITY</span>
               </div>
 
-              {/* คอนเทนเนอร์แสดงแอนิเมชัน 3D Core */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px] bg-gradient-to-b from-[#060c1c] to-[#02050c] flex items-center justify-center">
-                <div className="w-full h-full flex items-center justify-center p-4">
-                  <Hero3DCore />
-                </div>
+              {/* คอนเทนเนอร์รูปภาพ */}
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px] bg-slate-900">
+                <img
+                  src="/profile.jpg"
+                  alt="อชิรวัฒน์ แสงทอง"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  onError={(e) => {
+                    // ป้องกันปัญหานามสกุลไฟล์ไม่ตรง
+                    const target = e.currentTarget;
+                    if (target.src.endsWith(".jpg")) target.src = "/profile.png";
+                    else if (target.src.endsWith(".png")) target.src = "/profile.jpeg";
+                    else if (target.src.endsWith(".jpeg")) target.src = "/profile.JPG";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* HUD Status Bar ด้านล่าง */}
+              {/* HUD Status Bar ด้านล่างรูป */}
               <div className="mt-3 px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                  <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                   <span className="font-mono text-xs text-slate-300">
                     Chiang Mai, TH
                   </span>
