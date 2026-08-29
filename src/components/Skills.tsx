@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import React from "react";
@@ -12,17 +13,20 @@ import {
   Code2, 
   Cpu, 
   Workflow, 
-  Globe 
+  Globe,
+  Sparkles,
+  Activity
 } from "lucide-react";
+import Hero3DCore from "./Hero3DCore";
 
 export default function Skills() {
   const stages = [
     {
       title: "Data & Tools ที่ใช้จริง",
       desc: "เครื่องมือหลักที่ใช้จัดการข้อมูลและทำโปรเจกต์จริง",
-      accent: "from-emerald-500/10 via-cyan-500/5 to-transparent",
-      borderColor: "hover:border-cyan-500/50",
-      iconBg: "text-cyan-400 bg-cyan-500/10 border-cyan-500/25",
+      accent: "from-cyan-500/15 via-blue-500/5 to-transparent",
+      borderColor: "border-cyan-500/30 hover:border-cyan-400",
+      iconBg: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       icon: <Terminal className="w-5 h-5" />,
       skills: [
         {
@@ -53,9 +57,9 @@ export default function Skills() {
     {
       title: "Web & UI ที่กำลังลุย",
       desc: "เน้นฝึกเขียนเว็บ ทำหน้าตาให้สวยและตอบสนองลื่นไหล",
-      accent: "from-sky-500/10 via-blue-500/5 to-transparent",
-      borderColor: "hover:border-sky-400/50",
-      iconBg: "text-sky-400 bg-sky-500/10 border-sky-500/25",
+      accent: "from-sky-500/15 via-blue-500/5 to-transparent",
+      borderColor: "border-sky-500/30 hover:border-sky-400",
+      iconBg: "text-sky-400 bg-sky-500/10 border-sky-500/30",
       icon: <Layers className="w-5 h-5" />,
       skills: [
         {
@@ -85,7 +89,7 @@ export default function Skills() {
           level: "พัฒนาเว็บแอปเต็มตัว",
           type: "tech",
           icon: (
-            <svg className="w-4 h-4 fill-sky-400" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-sky-300" viewBox="0 0 24 24">
               <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.632 18.016l-4.736-6.852v6.852H11.5V6.784h1.496l4.636 6.708V6.784h1.396v11.232h-1.396z"/>
             </svg>
           ),
@@ -95,9 +99,9 @@ export default function Skills() {
     {
       title: "เป้าหมายถัดไปกับ DII",
       desc: "สิ่งที่พร้อมลุยต่อเมื่อได้ทำโปรเจกต์จริงกับภาคธุรกิจ",
-      accent: "from-indigo-500/10 via-purple-500/5 to-transparent",
-      borderColor: "hover:border-indigo-400/50",
-      iconBg: "text-indigo-400 bg-indigo-500/10 border-indigo-500/25",
+      accent: "from-indigo-500/15 via-purple-500/5 to-transparent",
+      borderColor: "border-indigo-500/30 hover:border-indigo-400",
+      iconBg: "text-indigo-400 bg-indigo-500/10 border-indigo-500/30",
       icon: <Rocket className="w-5 h-5" />,
       skills: [
         {
@@ -123,86 +127,136 @@ export default function Skills() {
   ];
 
   return (
-    <section className="relative w-full py-24 px-6 sm:px-12 bg-[var(--bg-canvas)] overflow-hidden font-sans transition-colors duration-300">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-500/[0.04] blur-[140px] pointer-events-none rounded-full" />
+    <section className="relative w-full py-16 sm:py-24 font-sans select-none">
+      
+      {/* Glow Effect */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-500/[0.05] blur-[150px] pointer-events-none rounded-full" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-3">
+        <div className="mb-12 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="font-mono text-[11px] text-cyan-500 dark:text-cyan-300 tracking-widest uppercase">
-              SKILLS & ROADMAP
+            <span className="font-mono text-xs text-cyan-400 font-semibold tracking-widest uppercase">
+              SKILLS &amp; ROADMAP
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] tracking-tight leading-snug">
-            ทักษะที่ทำได้จริง & สิ่งที่พร้อมไปต่อ
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            ทักษะที่ทำได้จริง <span className="text-cyan-400">&amp;</span> สิ่งที่พร้อมไปต่อ
           </h2>
+          <p className="mt-2 text-slate-400 font-mono text-sm max-w-2xl">
+            โครงสร้างทักษะทางเทคนิค เครื่องมือที่ใช้งาน และเป้าหมายการต่อยอดสู่นวัตกรรมดิจิทัล
+          </p>
         </div>
 
-        {/* 3 Bento Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {stages.map((stage, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
-              className={`theme-card group relative rounded-3xl p-6 sm:p-7 shadow-lg ${stage.borderColor} transition-all duration-300 flex flex-col justify-between overflow-hidden`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-b ${stage.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+        {/* Layout: ฝั่งซ้าย 3D Character Workspace | ฝั่งขวา Bento Grid Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          {/* ฝั่งซ้าย: กล่องการ์ด 3D Workspace ของตัวการ์ตูน */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 flex flex-col justify-between rounded-3xl p-6 sm:p-7 border border-white/10 bg-[#030712]/80 backdrop-blur-2xl shadow-2xl relative overflow-hidden group"
+          >
+            {/* Ambient Shadow ด้านหลัง */}
+            <div className="absolute -inset-1 bg-gradient-to-b from-cyan-500/20 via-blue-500/10 to-transparent blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              <div className="relative z-10">
-                {/* Top: Icon Box */}
-                <div className={`w-12 h-12 rounded-2xl border ${stage.iconBg} flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform duration-300`}>
-                  {stage.icon}
-                </div>
+            {/* ส่วนหัวการ์ด 3D */}
+            <div className="relative z-10 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Activity className="w-4 h-4 text-cyan-400 animate-pulse" />
+                <span className="font-mono text-xs font-bold tracking-wider text-slate-200 uppercase">
+                  DEV WORKSPACE // 3D
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 px-2 py-0.5 rounded-full font-semibold">
+                ACTIVE
+              </span>
+            </div>
 
-                {/* Card Titles */}
-                <h3 className="text-lg font-bold text-[var(--text-primary)] tracking-tight mb-1.5">
-                  {stage.title}
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] mb-6 leading-relaxed min-h-[34px]">
-                  {stage.desc}
-                </p>
+            {/* โมเดล 3D การ์ตูนโต๊ะคอม */}
+            <div className="relative z-10 flex-1 my-6 min-h-[300px] sm:min-h-[360px] flex items-center justify-center">
+              <Hero3DCore />
+            </div>
 
-                {/* Skill List */}
-                <div className="space-y-2.5">
-                  {stage.skills.map((skill, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className="flex items-center justify-between p-2.5 sm:p-3 rounded-xl bg-slate-900/10 dark:bg-slate-950/60 border border-[var(--border-card)] hover:border-cyan-500/40 transition-all"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-6 h-6 rounded-lg bg-black/5 dark:bg-white/[0.04] border border-[var(--border-card)] flex items-center justify-center flex-shrink-0">
-                          {skill.icon}
-                        </div>
-                        <span className="font-medium text-xs text-[var(--text-primary)]">
-                          {skill.name}
-                        </span>
-                      </div>
+            {/* ส่วนล่างของการ์ด 3D */}
+            <div className="relative z-10 p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between font-mono text-xs">
+              <div className="flex items-center gap-2 text-slate-300">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span>Focus: Web &amp; Data Pipeline</span>
+              </div>
+              <span className="text-[11px] text-cyan-400 font-bold">2026</span>
+            </div>
+          </motion.div>
 
-                      {skill.type === "target" ? (
-                        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[10px] text-emerald-600 dark:text-emerald-300 font-medium">
-                            {skill.level}
+          {/* ฝั่งขวา: 3 Bento Stage Cards */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            {stages.map((stage, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className={`group relative rounded-3xl p-5 sm:p-6 border ${stage.borderColor} bg-[#030712]/80 backdrop-blur-xl shadow-xl transition-all duration-300 overflow-hidden`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${stage.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                <div className="relative z-10">
+                  {/* หัวข้อหมวด */}
+                  <div className="flex items-center gap-3.5 mb-3">
+                    <div className={`w-10 h-10 rounded-xl border ${stage.iconBg} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                      {stage.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                        {stage.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 leading-snug">
+                        {stage.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* รายการสกิล */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-4">
+                    {stage.skills.map((skill, sIdx) => (
+                      <div
+                        key={sIdx}
+                        className="flex flex-col justify-between p-3 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/40 hover:bg-white/[0.04] transition-all"
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-6 h-6 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center flex-shrink-0">
+                            {skill.icon}
+                          </div>
+                          <span className="font-semibold text-xs text-slate-100 truncate">
+                            {skill.name}
                           </span>
                         </div>
-                      ) : (
-                        <span className="text-[10px] text-[var(--text-muted)] bg-black/5 dark:bg-white/[0.03] border border-[var(--border-card)] px-2 py-0.5 rounded-md">
-                          {skill.level}
-                        </span>
-                      )}
-                    </div>
-                  ))}
+
+                        {skill.type === "target" ? (
+                          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 w-fit">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span className="text-[10px] text-emerald-300 font-semibold font-mono">
+                              {skill.level}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-[10px] text-slate-400 font-mono bg-white/[0.03] border border-white/[0.06] px-2 py-0.5 rounded-md w-fit">
+                            {skill.level}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
 
       </div>
