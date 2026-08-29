@@ -11,13 +11,13 @@ export default function Hero() {
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-24 px-6 sm:px-12 lg:px-20 bg-[#030712]">
       
-      {/* 1. ฉากหลัง 3D Scene เดิม (อนุภาคและโครงข่ายมิติลึก) */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-40">
+      {/* 1. ฉากหลัง 3D Scene (อนุภาคและโครงข่ายมิติ) */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-45">
         <HeroScene reduceMotion={false} />
       </div>
 
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.07] blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.08] blur-[160px] pointer-events-none rounded-full" />
       <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-blue-600/[0.06] blur-[150px] pointer-events-none rounded-full" />
 
       {/* ป้ายมุมซ้ายบน */}
@@ -65,49 +65,36 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* ฝั่งขวา: การ์ดรูปโปรไฟล์ ผสานกับ 3D Core ด้านหลัง */}
+        {/* ฝั่งขวา: การ์ดแสดงแอนิเมชัน 3D Avatar / Character */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="lg:col-span-5 flex items-center justify-center relative w-full"
         >
-          <div className="relative w-full max-w-[380px] group flex items-center justify-center">
+          <div className="relative w-full max-w-[400px] group">
             
-            {/* 2. โมเดล 3D Core วางเป็นโฮโลแกรมหมุนอยู่หลังการ์ดรูป */}
-            <div className="absolute -inset-16 -z-10 flex items-center justify-center pointer-events-none opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-              <Hero3DCore />
-            </div>
+            {/* Ambient Shadow Glow ด้านหลังการ์ด */}
+            <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-tr from-cyan-500/30 via-blue-500/20 to-transparent blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* Ambient Shadow Glow */}
-            <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-tr from-cyan-500/30 via-blue-500/20 to-transparent blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-
-            {/* กรอบรูปภาพ Cyber-Tech Card */}
-            <div className="relative w-full rounded-[28px] overflow-hidden border border-white/20 bg-slate-950/80 backdrop-blur-2xl shadow-2xl p-2.5">
+            {/* กรอบ Cyber-Tech Card */}
+            <div className="relative rounded-[28px] overflow-hidden border border-cyan-500/30 bg-slate-950/70 backdrop-blur-2xl shadow-2xl p-3">
               
-              {/* HUD Badge บนภาพ */}
-              <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-3 py-1 rounded-xl bg-black/65 backdrop-blur-md border border-white/15 font-mono text-[11px] text-cyan-300 shadow-lg">
+              {/* HUD Badge บนการ์ด */}
+              <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-3 py-1 rounded-xl bg-black/70 backdrop-blur-md border border-cyan-500/30 font-mono text-[11px] text-cyan-300 shadow-lg">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>DEV // IDENTITY</span>
+                <span>3D // INTERACTIVE</span>
               </div>
 
-              {/* คอนเทนเนอร์รูปภาพ */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px] bg-slate-900">
-                <img
-                  src="/profile.jpg"
-                  alt="อชิรวัฒน์ แสงทอง"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 brightness-[1.02] contrast-[1.03]"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    if (target.src.endsWith(".jpg")) target.src = "/profile.png";
-                    else if (target.src.endsWith(".png")) target.src = "/profile.jpeg";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              {/* คอนเทนเนอร์แสดงแอนิเมชัน 3D Core */}
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px] bg-gradient-to-b from-[#060c1c] to-[#02050c] flex items-center justify-center">
+                <div className="w-full h-full flex items-center justify-center p-4">
+                  <Hero3DCore />
+                </div>
               </div>
 
-              {/* HUD Status Bar ด้านล่างรูป */}
-              <div className="mt-2.5 px-3 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between">
+              {/* HUD Status Bar ด้านล่าง */}
+              <div className="mt-3 px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Terminal className="w-3.5 h-3.5 text-cyan-400" />
                   <span className="font-mono text-xs text-slate-300">
