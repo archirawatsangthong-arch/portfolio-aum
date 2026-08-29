@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/* ============================================================
+   1. DESIGN TOKENS & SYSTEM VARIABLES (Cosmic Cyan & Clean Light)
+   ============================================================ */
+:root {
+  --bg-canvas: #030712;
+  --bg-card: rgba(7, 11, 20, 0.75);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --color-accent: #38bdf8;
+  --color-accent-ink: #0ea5e9;
+  --color-canvas: #030712;
+  --color-ink: #f8fafc;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.15);
+}
+
+html.light {
+  --bg-canvas: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-card: rgba(15, 23, 42, 0.08);
+  --text-primary: #0f172a;
+  --text-muted: #475569;
+  --color-accent: #0284c7;
+  --color-accent-ink: #0369a1;
+  --color-canvas: #f8fafc;
+  --color-ink: #0f172a;
+  --color-line: #e2e8f0;
+  --color-line-strong: #cbd5e1;
+}
+
+@theme {
+  --color-canvas: var(--bg-canvas);
+  --color-ink: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-ink: var(--color-accent-ink);
+  --color-line: var(--border-card);
+
+  /* เชื่อมกับตัวแปรฟอนต์จาก layout.tsx โดยตรง */
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
+
+  --text-display: clamp(3.25rem, 12vw, 11rem);
+  --text-headline: clamp(2rem, 5.2vw, 4.25rem);
+  --text-title: clamp(1.5rem, 3vw, 2.5rem);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0.9, 0.1, 1);
+}
+
+/* ============================================================
+   2. BASE SYSTEM
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+  background-color: var(--bg-canvas);
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #030712;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   3. ANIMATIONS & NEON GLOW EFFECTS
+   ============================================================ */
+.neon-glow {
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.6), 0 0 35px rgba(14, 165, 233, 0.35);
+}
+
+@keyframes text-shimmer-anim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.liquid-shimmer {
+  background: linear-gradient(90deg, #38bdf8, #ffffff, #0ea5e9, #38bdf8);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer-anim 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+}
+
+@keyframes grid-drift {
+  to { background-position: 72px 72px, 72px 72px, 18px 18px, 18px 18px; }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   4. KINETIC & SECTION LAYOUTS (Cyan Unified)
+   ============================================================ */
+.engineering-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(56, 189, 248, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px, 72px 72px, 18px 18px, 18px 18px;
+  animation: grid-drift 16s linear infinite;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+
+.portfolio-kinetic,
+.portfolio-studio,
+.portfolio-fluid {
+  min-height: 100dvh;
+  overflow-x: clip;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.fluid-heading,
+.kinetic-heading,
+.studio-heading {
+  display: grid;
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.fluid-heading > p,
+.kinetic-heading > p,
+.studio-heading > p {
+  color: var(--color-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fluid-heading > h2,
+.kinetic-heading > h2,
+.studio-heading > h2 {
+  max-width: 52rem;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.98;
+}
+
+.fluid-heading > span,
+.kinetic-heading > span,
+.studio-heading > span {
+  max-width: 38rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+  .fluid-heading,
+  .kinetic-heading {
+    grid-template-columns: 0.55fr 1.15fr 0.8fr;
+    column-gap: 2rem;
+  }
+  .fluid-heading > span,
+  .kinetic-heading > span {
+    justify-self: end;
+  }
+}
+
+/* ============================================================
+   5. INTERACTIVE 3D & CARDS
+   ============================================================ */
+.project-glare {
+  opacity: 0;
+  background: radial-gradient(280px circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.2), transparent 62%);
+  transition: opacity 240ms ease-out;
+  mix-blend-mode: screen;
+}
+
+.project-tilt:hover .project-glare {
+  opacity: 0.65;
+}
+
+.spotlight-card::before,
+.studio-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(320px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(56, 189, 248, 0.85), transparent 55%);
+  pointer-events: none;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.theme-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   6. LIGHT MODE OVERRIDES
+   ============================================================ */
+html.light {
+  color-scheme: light;
+}
+
+html.light body,
+html.light section,
+html.light div[class*="bg-[#030712]"],
+html.light div[class*="bg-[#050914]"],
+html.light div[class*="bg-[#070b14]"],
+html.light div[class*="bg-[#08090c]"],
+html.light div[class*="bg-[#0b0d11]"],
+html.light div[class*="bg-[#0c0e12]"] {
+  background-color: #f8fafc !important;
+}
+
+html.light article,
+html.light .theme-card,
+html.light div[class*="bg-slate-950"],
+html.light div[class*="bg-[#11141c]"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light .text-white,
+html.light .text-slate-100 {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+
+html.light p,
+html.light .text-slate-300,
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light .neon-glow {
+  text-shadow: none !important;
+}
