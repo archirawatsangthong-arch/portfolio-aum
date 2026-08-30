@@ -60,7 +60,7 @@ export default function Hero() {
               <span className="text-cyan-400 font-extrabold">(อั้ม)</span>
             </h1>
             <p className="mt-2 font-mono text-xl sm:text-2xl text-cyan-300 font-bold tracking-widest uppercase">
-              ACHIRAWAT SANGTHONG
+              ACHIRAWAT SANGTHONG (AUM)
             </p>
           </div>
 
