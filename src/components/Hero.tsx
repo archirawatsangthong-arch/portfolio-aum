@@ -10,7 +10,10 @@ import {
   HeartHandshake, 
   Code2, 
   Sparkles,
-  Home
+  Home,
+  Trophy,
+  TrendingUp,
+  Gamepad2
 } from "lucide-react";
 import HeroScene from "./HeroScene";
 
@@ -57,7 +60,7 @@ export default function Hero() {
               <span className="text-cyan-400 font-extrabold">(อั้ม)</span>
             </h1>
             <p className="mt-2 font-mono text-xl sm:text-2xl text-cyan-300 font-bold tracking-widest uppercase">
-              ACHIRAWAT SANGTHONG (AUM)
+              ACHIRAWAT SANGTHONG
             </p>
           </div>
 
@@ -102,7 +105,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* 3. ความสนใจพิเศษ */}
+            {/* 3. ความสนใจพิเศษ (อัปเดตใหม่) */}
             <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg">
               <div className="flex items-center gap-2 text-amber-400 font-mono text-sm font-bold uppercase tracking-wider mb-3">
                 <Code2 className="w-5 h-5" />
@@ -112,8 +115,14 @@ export default function Hero() {
                 <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-medium">
                   Web Development
                 </span>
+                <span className="px-2.5 py-1 rounded-lg bg-purple-500/10 border border-purple-500/25 text-purple-300 text-xs font-medium">
+                  E-Sports
+                </span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-medium">
+                  Business
+                </span>
                 <span className="px-2.5 py-1 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs font-medium">
-                  การคิดเชิงระบบ
+                  การพัฒนาตนเอง
                 </span>
                 <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-300 text-xs font-medium">
                   กีฬาฟุตบอล
